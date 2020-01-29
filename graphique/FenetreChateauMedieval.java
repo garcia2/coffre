@@ -5,6 +5,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import coffre.Coffre;
+import controler.CoffreController;
+import controler.StrategyController;
 
 public class FenetreChateauMedieval extends JFrame implements ActionListener, WindowListener, Observateur {
 
@@ -15,13 +17,14 @@ public class FenetreChateauMedieval extends JFrame implements ActionListener, Wi
 	private JButton btFermerCoffre;
 	private JButton btQuitter;
 
-	private Coffre coffre;
+	
+	private StrategyController controller;
 
 	private FenetreChienGentil fenetreChienGentil;
 	private FenetreLapinTueur fenetreLapinTueur;
 	private FenetreEtat fenetreEtat;
 
-	public FenetreChateauMedieval() {
+	public FenetreChateauMedieval(StrategyController controller) {
 
 		setTitle("exercice Chateau Médiéval (F02)");
 		setBounds(500, 100, 400, 200);
@@ -61,21 +64,18 @@ public class FenetreChateauMedieval extends JFrame implements ActionListener, Wi
 		addWindowListener(this);
 		setVisible(true);
 
-		coffre = new Coffre();
+		this.controller = controller;
+		
 
 		fenetreChienGentil = new FenetreChienGentil();
 		fenetreLapinTueur = new FenetreLapinTueur();
 		fenetreEtat = new FenetreEtat();
 
-		this.MAJ(coffre);
-		fenetreChienGentil.MAJ(coffre);
-		fenetreLapinTueur.MAJ(coffre);
-		fenetreEtat.MAJ(coffre);
 
-		coffre.attacher(this);
-		coffre.attacher(fenetreChienGentil);
-		coffre.attacher(fenetreLapinTueur);
-		coffre.attacher(fenetreEtat);
+		controller.attacher(this);
+		controller.attacher(fenetreChienGentil);
+		controller.attacher(fenetreLapinTueur);
+		controller.attacher(fenetreEtat);
 
 	}
 
@@ -83,25 +83,25 @@ public class FenetreChateauMedieval extends JFrame implements ActionListener, Wi
 
 		if (e.getSource() == btOterLivre) {
 			System.out.println("Vous venez d'appuyer sur le bouton Oter Livre UML");
-			coffre.oterLivre();
+			controller.oterLivre();
 		}
 		if (e.getSource() == btRemettreLivre) {
 			System.out.println("Vous venez d'appuyer sur le bouton Remettre Livre UML");
-			coffre.remettreLivre();
+			controller.remettreLivre();
 		}
 		if (e.getSource() == btTournerGauche) {
 			System.out.println("Vous venez d'appuyer sur le bouton Tourner Chandelle vers la Gauche");
-			coffre.tournerChandelleVersGauche();
+			controller.tournerChandelleVersGauche();
 		}
 		;
 		if (e.getSource() == btTournerDroite) {
 			System.out.println("Vous venez d'appuyer sur le bouton Tourner Chandelle vers la Droite");
-			coffre.tournerChandelleVersDroite();
+			controller.tournerChandelleVersDroite();
 		}
 		;
 		if (e.getSource() == btFermerCoffre) {
 			System.out.println("Vous venez d'appuyer sur le bouton Fermer Coffre");
-			coffre.fermerCoffre();
+			controller.fermerCoffre();
 		}
 		;
 		if (e.getSource() == btQuitter) {
@@ -171,7 +171,7 @@ public class FenetreChateauMedieval extends JFrame implements ActionListener, Wi
 	*/
 
 	public static void main(String[] args) {
-		FenetreChateauMedieval c = new FenetreChateauMedieval();
+		//FenetreChateauMedieval c = new FenetreChateauMedieval();
 	}
 
 	@Override

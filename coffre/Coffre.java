@@ -86,6 +86,7 @@ public class Coffre implements I_CoffreChateau {
 	
 	public void attacher(Observateur o) {
 		observateurs.add(o);
+		o.MAJ(this);
 	}
 
 	@Override
